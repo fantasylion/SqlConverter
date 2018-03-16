@@ -9,7 +9,7 @@ It can convert spring-schedule-task.xml into an SQL statement.
 py readX.py --xmlFile=../dev/spring-schedule-task-dev.xml --propFile=../dev/schedule-dev.properties
 ```
 
---xmlFile=spring-schedule-task.xml and --propFile=schedule.properties is default so you can do like that
+`--xmlFile=spring-schedule-task.xml` and `--propFile=schedule.properties` is default so you can do like that
 
 ```Python
 py readX.py
