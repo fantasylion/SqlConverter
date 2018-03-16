@@ -49,7 +49,7 @@ for bean in beanlist:
 			maps.append(proJson);
 
 
-print('-------------------------------')
+print('--------------开始创建SQL-----------------')
 fileName = 'schedule-pro.properties'
 p = Properties(fileName)
 properties = p.getProperties()
@@ -62,13 +62,13 @@ fo = open("test.sql", "w", encoding="utf-8")
 
 count = 1
 for pro in maps:
-	sqlContext = "INSERT INTO '定时任务' ('id', 'bean_name', 'code', 'description', 'lifecycle', 'method_name', 'time_exp', 'version') VALUES (count, '" + pro['targetObject'] + "', '" + pro['codeName'] + "', '暂无', 1, '" + pro['targetMethod'] + "', '" + pro['timeExpre'] + "', '2018-3-13 15:00:29.537')\n"
+	sqlContext = "INSERT INTO t_sys_scheduler_task (id, bean_name, code, description, lifecycle, method_name, time_exp, version) VALUES (" + str(count) + ", '" + pro['targetObject'] + "', '" + pro['codeName'] + "', '暂无', 1, '" + pro['targetMethod'] + "', '" + pro['timeExpre'] + "', now())\n"
 	fo.write( sqlContext )
 	count = count + 1
 
 # 关闭文件
 fo.close()
-
+print('--------------创建SQL结束-----------------')
 # print(maps)
 
 
