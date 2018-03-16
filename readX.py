@@ -62,7 +62,7 @@ fo = open("test.sql", "w", encoding="utf-8")
 
 count = 1
 for pro in maps:
-	sqlContext = "INSERT INTO t_sys_scheduler_task (id, bean_name, code, description, lifecycle, method_name, time_exp, version) VALUES (" + str(count) + ", '" + pro['targetObject'] + "', '" + pro['codeName'] + "', '暂无', 1, '" + pro['targetMethod'] + "', '" + pro['timeExpre'] + "', now())\n"
+	sqlContext = "INSERT INTO t_sys_scheduler_task (id, bean_name, code, description, lifecycle, method_name, time_exp, version) VALUES (" + str(count) + ", '" + pro['targetObject'] + "', '" + pro['codeName'] + "', '暂无', 1, '" + pro['targetMethod'] + "', '" + pro['timeExpre'] + "', now());\n"
 	fo.write( sqlContext )
 	count = count + 1
 
