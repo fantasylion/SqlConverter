@@ -21,9 +21,6 @@ for list in beanlist:
 
 
 beanName2 = ''
-mapJson = {}
-mapJson2 = {}
-values = []
 maps = []
 for bean in beanlist:
 	
@@ -34,7 +31,7 @@ for bean in beanlist:
 		if beanName2 == beanName:
 			propertys = bean.getElementsByTagName('property')
 			
-			proJson = {}
+			proJson = {'codeName':beanName}
 			for pro in propertys:
 				if pro.getAttribute('name') == 'jobDetail':
 					objbean = pro.getElementsByTagName('bean')
@@ -42,16 +39,15 @@ for bean in beanlist:
 					targetMethod = objbean[0].getAttribute('p:targetMethod')
 					proJson['targetObject']=objectRef
 					proJson['targetMethod']=targetMethod
-					print( objectRef + " : " + targetMethod )
+					# print( objectRef + " : " + targetMethod )
 
 				if pro.getAttribute('name') == 'cronExpression':
 					value = pro.getAttribute('value')
 					value = value.replace("#{p_schedule['", "")
 					value = value.replace("']}", "")
-					mapJson[beanName] = value
 					proJson['timeExpreKey'] = value
 			maps.append(proJson);
-			mapJson2[beanName] = [objectRef, targetMethod, value]
+
 
 print('-------------------------------')
 fileName = 'schedule-pro.properties'
@@ -60,12 +56,19 @@ properties = p.getProperties()
 
 for pro in maps:
 	pro['timeExpre'] = properties.get(pro['timeExpreKey'])
-			
-resultMap = {}
 
-for key in mapJson:
-	resultMap[key] = [mapJson.get(key), properties.get(mapJson.get(key))]
+# 打开文件
+fo = open("test.sql", "w", encoding="utf-8")
 
-print(maps)
+count = 1
+for pro in maps:
+	sqlContext = "INSERT INTO '定时任务' ('id', 'bean_name', 'code', 'description', 'lifecycle', 'method_name', 'time_exp', 'version') VALUES (count, '" + pro['targetObject'] + "', '" + pro['codeName'] + "', '暂无', 1, '" + pro['targetMethod'] + "', '" + pro['timeExpre'] + "', '2018-3-13 15:00:29.537')\n"
+	fo.write( sqlContext )
+	count = count + 1
+
+# 关闭文件
+fo.close()
+
+# print(maps)
 
 
