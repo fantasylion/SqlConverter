@@ -15,3 +15,5 @@ py readX.py --xmlFile=../dev/spring-schedule-task-dev.xml --propFile=../dev/sche
 ```Python
 py readX.py
 ```
+It will create a file name result.sql at project dirctory
+
