@@ -2,9 +2,20 @@
 
 import xml.dom.minidom
 from Util import Properties
+import argparse
+
+parser = argparse.ArgumentParser(description='manual to this script')
+parser.add_argument('--xmlFile', type=str, default = 'spring-schedule-task.xml')
+parser.add_argument('--propFile', type=str, default = 'schedule-pro.properties')
+args = parser.parse_args()
+xmlFilePath = args.xmlFile
+propFilePath = args.propFile
+print(args.xmlFile)
+print(args.propFile)
+
 
 # 打开xml文档
-dom = xml.dom.minidom.parse('spring-schedule-task-pro.xml')
+dom = xml.dom.minidom.parse(xmlFilePath)
 
 # 得到文档元素对象
 root = dom.documentElement
@@ -50,15 +61,14 @@ for bean in beanlist:
 
 
 print('--------------开始创建SQL-----------------')
-fileName = 'schedule-pro.properties'
-p = Properties(fileName)
+p = Properties(propFilePath)
 properties = p.getProperties()
 
 for pro in maps:
 	pro['timeExpre'] = properties.get(pro['timeExpreKey'])
 
 # 打开文件
-fo = open("test.sql", "w", encoding="utf-8")
+fo = open("result.sql", "w", encoding="utf-8")
 
 count = 1
 for pro in maps:
