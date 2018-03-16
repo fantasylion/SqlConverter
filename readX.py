@@ -6,7 +6,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description='manual to this script')
 parser.add_argument('--xmlFile', type=str, default = 'spring-schedule-task.xml')
-parser.add_argument('--propFile', type=str, default = 'schedule-pro.properties')
+parser.add_argument('--propFile', type=str, default = 'schedule.properties')
 args = parser.parse_args()
 xmlFilePath = args.xmlFile
 propFilePath = args.propFile
