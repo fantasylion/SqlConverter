@@ -2,6 +2,7 @@
 It can convert spring-schedule-task.xml into an SQL statement. 
 
 ### Require
+python version 3.5.2
 
 ### How to use
 
