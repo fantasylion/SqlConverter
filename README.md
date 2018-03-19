@@ -15,5 +15,12 @@ py readX.py --xmlFile=../dev/spring-schedule-task-dev.xml --propFile=../dev/sche
 ```Python
 py readX.py
 ```
+
+### Options
+
+* xmlFile     schedule.xml
+* propFile    cronExpression.properties
+* tableName   table name
+
 It will create a file name `result.sql` at project dirctory
 
