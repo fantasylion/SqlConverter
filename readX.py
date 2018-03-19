@@ -7,11 +7,16 @@ import argparse
 parser = argparse.ArgumentParser(description='manual to this script')
 parser.add_argument('--xmlFile', type=str, default = 'spring-schedule-task.xml')
 parser.add_argument('--propFile', type=str, default = 'schedule.properties')
+parser.add_argument('--tableName', type=str, default = 't_sys_scheduler_task')
+
 args = parser.parse_args()
 xmlFilePath = args.xmlFile
 propFilePath = args.propFile
-print(args.xmlFile)
-print(args.propFile)
+tableName = args.tableName
+
+print("xml file Path: " + args.xmlFile)
+print("properties file Path: " + args.propFile)
+print("table name: " + tableName)
 
 
 # 打开xml文档
@@ -72,7 +77,7 @@ fo = open("result.sql", "w", encoding="utf-8")
 
 count = 1
 for pro in maps:
-	sqlContext = "INSERT INTO t_sys_scheduler_task (id, bean_name, code, description, lifecycle, method_name, time_exp, version) VALUES (" + str(count) + ", '" + pro['targetObject'] + "', '" + pro['codeName'] + "', '暂无', 1, '" + pro['targetMethod'] + "', '" + pro['timeExpre'] + "', now());\n"
+	sqlContext = "INSERT INTO " + tableName + " (id, bean_name, code, description, lifecycle, method_name, time_exp, version) VALUES (" + str(count) + ", '" + pro['targetObject'] + "', '" + pro['codeName'] + "', '暂无', 1, '" + pro['targetMethod'] + "', '" + pro['timeExpre'] + "', now());\n"
 	fo.write( sqlContext )
 	count = count + 1
 
